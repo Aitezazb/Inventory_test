@@ -24,6 +24,11 @@ namespace Inventory.Infrastructure.Repositories
             return _context.Products.AsNoTracking().AnyAsync(x => productName.Equals(x.Name));
         }
 
+        public Task<bool> IsProductInStock(string productName)
+        {
+            return _context.Products.AsNoTracking().AnyAsync(x => productName.Equals(x.Name) && x.Status == ProductStatus.InStock);
+        }
+
         public List<KeyValuePair<string, int>> CountOfAllProductStatuses()
         {
            var productStatusCount =  _context.Products.ToList().GroupBy(x => x.Status)
@@ -40,7 +45,6 @@ namespace Inventory.Infrastructure.Repositories
 
             _context.SaveChanges();
         }
-        
 
     }
 }

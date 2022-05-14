@@ -42,6 +42,11 @@ namespace Inventory.Application.Services
                 throw new Exception("Could Find Product with this Name");
             }
 
+            if(!await _productRepository.IsProductInStock(productName))
+            {
+                throw new Exception("Product is sold Out");
+            }
+
             //we don't have quantity of product so accusing that its only one product 
             await _productRepository.ChangeProductStatus(productName,
                 ProductStatus.Sold);

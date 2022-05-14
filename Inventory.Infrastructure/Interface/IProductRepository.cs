@@ -10,6 +10,7 @@ namespace Inventory.Infrastructure.Interface
     {
         Task ChangeProductStatus(string productName, ProductStatus status);
         List<KeyValuePair<string, int>> CountOfAllProductStatuses();
+        Task<bool> IsProductInStock(string productName);
         Task<bool> IsValidProductName(string productName);
     }
 }
